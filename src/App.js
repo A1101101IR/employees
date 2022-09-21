@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { useInfiniteQuery } from "react-query";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   };
   const { data, isLoading, fetchNextPage, hasNextPage, error } =
     useInfiniteQuery("users", fetchData, {
-      getNextPageParam: (lastPage, pages) => {
+      getNextPageParam: (lastPage) => {
         if (lastPage.page < lastPage.total_pages) return lastPage.page + 1;
         return false;
       },
@@ -17,17 +17,25 @@ function App() {
   return (
     <>
       <div className="body">
-        {isLoading && <h3>Loading...</h3>}
-        {error && <h3>OBS! something went wrong.</h3>}
-        <h2 className="title">OUR EMPLOYEES</h2>
+        {isLoading && (
+          <div className="loading">
+            <p>Loading... </p>
+          </div>
+        )}
+        {error && (
+          <div className="error">
+            <p>OBS! something went wrong.</p>
+          </div>
+        )}
+        {data && <h2 className="title">OUR EMPLOYEES</h2>}
         <div className="our-employees-list">
           {data &&
-            data.pages.map((userData, i) => {
+            data.pages.map((usersData) => {
               return (
                 <>
-                  <Fragment key={userData.id}>
-                    {userData.data.map((user, i) => (
-                      <div className="employee-cart" key={userData.id}>
+                  <Fragment key={usersData.id}>
+                    {usersData.data.map((user) => (
+                      <div className="employee-cart" key={user.id}>
                         <img
                           src={user.avatar}
                           alt={user.first_name + user.last_name + "avatar"}

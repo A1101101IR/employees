@@ -31,6 +31,30 @@
     background-color: #0583F2;
     color: white;
   }
+  .loading {
+    @include flexAllCenter();
+    width: 500px;
+    height: 260px;
+    margin-top: 50px;
+    color: #00529B;
+		background-color: #BDE5F8;
+    border-radius: 10px;
+    p {
+      font-size: 24px;
+    }
+  }
+  .error {
+    @include flexAllCenter();
+    width: 500px;
+    height: 260px;
+    margin-top: 50px;
+    color: #D8000C;
+		background-color: #FFBABA;
+    border-radius: 10px;
+    p {
+      font-size: 24px;
+    }
+  }
 }
 .our-employees-list {
   @include flexAllCenter();
@@ -47,6 +71,7 @@
     padding: 10px;
     border-radius: 10px;
     background-color: #F2F2F2;
+    animation: fadeIn 1s ease 0s 1 normal forwards;
     img {
       width: 100px;
       min-width: 100px;
@@ -68,6 +93,16 @@
       font-size: 14px;
     }
   }
-  
-  
+  .employee-cart:hover {
+    background-color: #ffa2ff;
+  }
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
 }
